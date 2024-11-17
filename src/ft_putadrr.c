@@ -1,41 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_putadrr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ticasali <ticasali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 11:36:44 by ticasali          #+#    #+#             */
-/*   Updated: 2024/11/15 21:13:18 by ticasali         ###   ########.fr       */
+/*   Created: 2024/11/17 04:31:32 by ticasali          #+#    #+#             */
+/*   Updated: 2024/11/17 05:02:08 by ticasali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-int	ft_printf(char const *str, ...)
+void	ft_print_addr(void	*adrr, char *base)
 {
-	va_list	va;
-	size_t	ct;
-	int		ret;
-
-	ct = 0;
-	ret = 0;
-	va_start(va, str);
-	while (str[ct] != '\0')
+	char	stock[16];
+	int		cmp;
+	unsigned long adr;
+	cmp = -1;
+	adr = (unsigned long)(unsigned char *)(adrr);
+	while (++cmp < 16)
 	{
-		if (str[ct] == '%')
-			ret = ft_select_params(va, (char *)(&str[ct + 1]));
-//		else if (str[ct - 1] != '%')
-//			ft_putchar(str[ct]);
-		++ct;
+		stock[cmp] = base[adr % 16];
+		adr = adr / 16;
 	}
-	va_end(va);
-	return (ret);
-}
-
-int	main(int ac, char **av)
-{
-	char c = 'R';
-	char str[] = "Bonjour";
-	ft_printf("%s%c\n\n", str, c);
+	while (cmp--)
+	{
+		write(1, &stock[cmp], 1);
+	}
 }

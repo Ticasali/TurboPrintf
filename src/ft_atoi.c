@@ -1,41 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ticasali <ticasali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 11:36:44 by ticasali          #+#    #+#             */
-/*   Updated: 2024/11/15 21:13:18 by ticasali         ###   ########.fr       */
+/*   Created: 2024/11/16 18:18:50 by ticasali          #+#    #+#             */
+/*   Updated: 2024/11/16 22:42:22 by ticasali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-int	ft_printf(char const *str, ...)
+size_t	ft_atoi(char const *str)
 {
-	va_list	va;
+	size_t	ret;
 	size_t	ct;
-	int		ret;
 
 	ct = 0;
 	ret = 0;
-	va_start(va, str);
-	while (str[ct] != '\0')
+	while (str[ct] >= '0' && str[ct] <= '9')
 	{
-		if (str[ct] == '%')
-			ret = ft_select_params(va, (char *)(&str[ct + 1]));
-//		else if (str[ct - 1] != '%')
-//			ft_putchar(str[ct]);
-		++ct;
+		ret += (str[ct] + 48);
+		if (str[++ct] >= '0' && str[ct] <= '9')
+			ret *= 10;
 	}
-	va_end(va);
 	return (ret);
 }
 
-int	main(int ac, char **av)
+size_t	ft_count_atoi(int n)
 {
-	char c = 'R';
-	char str[] = "Bonjour";
-	ft_printf("%s%c\n\n", str, c);
+	int	ret;
+
+	ret = 0;
+	while (n >= 10)
+	{
+		++ret;
+		n /= 10;
+	}
+	return (ret + 1);
 }

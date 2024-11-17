@@ -1,41 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ticasali <ticasali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 11:36:44 by ticasali          #+#    #+#             */
-/*   Updated: 2024/11/15 21:13:18 by ticasali         ###   ########.fr       */
+/*   Created: 2024/11/16 18:06:19 by ticasali          #+#    #+#             */
+/*   Updated: 2024/11/16 18:07:21 by ticasali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-int	ft_printf(char const *str, ...)
+size_t	ft_strlen(char *str)
 {
-	va_list	va;
-	size_t	ct;
-	int		ret;
+	size_t	ret;
 
-	ct = 0;
 	ret = 0;
-	va_start(va, str);
-	while (str[ct] != '\0')
-	{
-		if (str[ct] == '%')
-			ret = ft_select_params(va, (char *)(&str[ct + 1]));
-//		else if (str[ct - 1] != '%')
-//			ft_putchar(str[ct]);
-		++ct;
-	}
-	va_end(va);
+	while (str[ret])
+		++ret;
 	return (ret);
-}
-
-int	main(int ac, char **av)
-{
-	char c = 'R';
-	char str[] = "Bonjour";
-	ft_printf("%s%c\n\n", str, c);
 }

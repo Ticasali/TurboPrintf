@@ -1,41 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ticasali <ticasali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/14 11:36:44 by ticasali          #+#    #+#             */
-/*   Updated: 2024/11/15 21:13:18 by ticasali         ###   ########.fr       */
+/*   Created: 2024/11/16 18:07:00 by ticasali          #+#    #+#             */
+/*   Updated: 2024/11/16 23:09:18 by ticasali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-int	ft_printf(char const *str, ...)
+int	ft_putchar(char c)
 {
-	va_list	va;
-	size_t	ct;
-	int		ret;
-
-	ct = 0;
-	ret = 0;
-	va_start(va, str);
-	while (str[ct] != '\0')
-	{
-		if (str[ct] == '%')
-			ret = ft_select_params(va, (char *)(&str[ct + 1]));
-//		else if (str[ct - 1] != '%')
-//			ft_putchar(str[ct]);
-		++ct;
-	}
-	va_end(va);
-	return (ret);
+	return (write(1, &c, 1));
 }
 
-int	main(int ac, char **av)
+int	ft_putchar_error(char c)
 {
-	char c = 'R';
-	char str[] = "Bonjour";
-	ft_printf("%s%c\n\n", str, c);
+	return (write(2, &c, 1));
 }
