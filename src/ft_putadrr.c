@@ -6,13 +6,13 @@
 /*   By: ticasali <ticasali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 04:31:32 by ticasali          #+#    #+#             */
-/*   Updated: 2024/11/17 05:02:08 by ticasali         ###   ########.fr       */
+/*   Updated: 2024/11/17 21:11:49 by ticasali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-void	ft_print_addr(void	*adrr, char *base)
+int	ft_print_addr(void	*adrr, char *base)
 {
 	char	stock[16];
 	int		cmp;
@@ -28,4 +28,5 @@ void	ft_print_addr(void	*adrr, char *base)
 	{
 		write(1, &stock[cmp], 1);
 	}
+	return (16);
 }

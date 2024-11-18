@@ -6,7 +6,7 @@
 /*   By: ticasali <ticasali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 11:35:26 by ticasali          #+#    #+#             */
-/*   Updated: 2024/11/17 04:53:05 by ticasali         ###   ########.fr       */
+/*   Updated: 2024/11/18 02:59:25 by ticasali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,17 @@
 #include <stdbool.h>
 
 #define RESET		"\x1b[0m"
+#define TWINKLE		"\x1b[7m"
 #define RED			"\x1b[31m"
 #define GREEN		"\x1b[32m"
 #define YELLOW		"\x1b[33m"
 #define BLUE		"\x1b[34m"
 #define MAGENTA		"\x1b[35m"
 #define CYAN		"\x1b[36m"
-#define TWINKLE		"\x1b[07m]"
 
 typedef	struct	pars_param_s
 {
+	bool	error;
 	bool	check;
 	size_t	number;
 	size_t	point;
@@ -54,11 +55,12 @@ int	ft_putstr(char *str);
 int	ft_putstr_error(char *str);
 int	ft_putchar(char c);
 int	ft_putchar_error(char c);
+int	ft_putnbr(int nb);
+int	ft_putnbr_unsigned(unsigned int nb);
+int	ft_putnbr_base(int nbr, char *base);
+int	ft_print_addr(unsigned long adr, char *base);
 bool	ft_check_char(char c);
-void	ft_putnbr(int nb);
-void	ft_putnbr_unsigned(unsigned int nb);
-void	ft_putnbr_base(int nbr, char *base);
-void	ft_print_addr(unsigned long adr, char *base)
+bool	ft_check_flag(char c);
 
 #endif
 

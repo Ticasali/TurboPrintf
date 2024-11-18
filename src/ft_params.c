@@ -6,11 +6,19 @@
 /*   By: ticasali <ticasali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 16:57:24 by ticasali          #+#    #+#             */
-/*   Updated: 2024/11/17 05:02:19 by ticasali         ###   ########.fr       */
+/*   Updated: 2024/11/18 03:26:35 by ticasali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
+
+bool	ft_check_flag(char c)
+{
+	if (c == 'c' || c == 's' || c == 'd' || c == 'p' || c == 'i' 
+		|| c == 'u' || c == 'x' || c == 'X')
+		return (true);
+	return (false);
+}
 
 bool	ft_check_char(char c)
 {
@@ -25,6 +33,7 @@ bool	ft_check_char(char c)
 
 pars_param_t	ft_set_false_struct(pars_param_t pars)
 {
+	pars.error = false;
 	pars.check = false;
 	pars.number = 0;
 	pars.point = 0;
@@ -96,7 +105,9 @@ int	ft_select_params(va_list va, char *str)
 	pars = ft_load_param(pars, str);
 	ret = 0;
 	if (pars.flag == 'c')
-		ret += ft_putchar(va_arg(va, int));
+	{
+		ret += ft_putchar_statement(va_arg(va, int), pars);
+	}
 	else if (pars.flag == 's')
 		ret += ft_putstr(va_arg(va, char *));
 	else if (pars.flag == 'd')
