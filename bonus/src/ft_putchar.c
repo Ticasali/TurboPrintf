@@ -1,43 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ticasali <ticasali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/01 20:10:48 by ticasali          #+#    #+#             */
-/*   Updated: 2024/12/02 17:23:58 by ticasali         ###   ########.fr       */
+/*   Created: 2024/11/16 18:07:00 by ticasali          #+#    #+#             */
+/*   Updated: 2024/11/29 12:13:59 by ticasali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-int	ft_printf(char const *str, ...)
+int	ft_print_char(char c, short debug, char effect)
 {
-	va_list	va;
-	size_t	ct;
-	int		ret;
-	int		temp;
+	if (effect == '\0')
+		return (write(debug, &c, 1));
+	if (ft_print_color(effect, debug) == -1)
+		return (-1);
+	if (write(debug , &c, 1) == -1)
+		return (-1);
+	if (ft_color_reset(debug) == -1)
+		return (-1);
+	return (1);
+}
 
-	ct = 0;
-	ret = 0;
-	va_start(va, str);
-	while (str[ct] != '\0')
-	{
-		temp = 0;
-		if (str[ct] == '%')
-			temp = ft_select_params(va, (char *)(&str[++ct]));
-		if (temp == -1)
-			return (-1);
-		ret += temp;
-		if (str[ct - 1] != '%' && str[ct] != '\0')
-		{
-			ret++;
-			if (ft_putchar(str[ct]) == -1)
-				return (-1);
-		}
-		++ct;
-	}
-	va_end(va);
-	return (ret);
+int	ft_putchar(char c)
+{
+	return (write(1, &c, 1));
 }

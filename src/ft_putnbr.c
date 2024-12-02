@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ticasali <ticasali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/17 00:44:47 by ticasali          #+#    #+#             */
-/*   Updated: 2024/11/17 21:12:35 by ticasali         ###   ########.fr       */
+/*   Created: 2024/12/02 15:35:30 by ticasali          #+#    #+#             */
+/*   Updated: 2024/12/02 22:51:00 by ticasali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,16 @@ int	ft_putnbr(int nb)
 {
 	if (nb == INT_MIN)
 	{
-		ft_putchar('-');
-		ft_putchar('2');
+		if ((ft_putchar('-') == -1) 
+			|| (ft_putchar('2' == -1)))
+			return (-1);
 		ft_putnbr(147483648);
 	}
 	else if (nb < 0)
 	{
-		ft_putchar('-');
-		nb *= -1;
-		ft_putnbr(nb);
+		if (ft_putchar('-') == -1)
+			return (-1);
+		ft_putnbr(nb * -1);
 	}
 	else if (nb >= 10)
 	{
@@ -33,34 +34,55 @@ int	ft_putnbr(int nb)
 		ft_putnbr(nb % 10);
 	}
 	else
-		ft_putchar(nb + 48);
-	return (1);
+		if (ft_putchar(nb + 48) == -1)
+			return (-1);
+	return (0);
 }
 
 int	ft_putnbr_unsigned(unsigned int nb)
 {
 	if (nb >= 10)
 	{
-		ft_putnbr(nb / 10);
-		ft_putnbr(nb % 10);
+		ft_putnbr_unsigned(nb / 10);
+		ft_putnbr_unsigned(nb % 10);
 	}
 	else
-		ft_putchar(nb + 48);
-	return (1);
+		if (ft_putchar(nb + 48) == -1)
+			return (-1);
+	return (0);
 }
 
 int	ft_putnbr_base(int nbr, char *base)
 {
-	long int	cmp;
+	unsigned int	cmp;
 
-	cmp = (long int)(nbr);
-	if (cmp < 0)
-	{
-		cmp *= -1;
-		ft_putchar('-');
-	}
-	if (cmp >= ft_strlen(base))
+	cmp = (unsigned int)(nbr);
+	if (cmp >= (unsigned int)ft_strlen(base))
 		ft_putnbr_base(cmp / ft_strlen(base), base);
-	ft_putchar(base[cmp % ft_strlen(base)]);
-	return (1);
+	if (ft_putchar(base[cmp % ft_strlen(base)]) == -1)
+		return (-1);
+	return (0);
+}
+
+int	ft_print_adr(void	*adrr, char *base)
+{
+	char	stock[12];
+	int		cmp;
+	unsigned long adr;
+	cmp = -1;
+	adr = (unsigned long)(adrr);
+	while (++cmp < 12)
+	{
+		stock[cmp] = base[adr % 16];
+		adr = adr / 16;
+	}
+	if (ft_putchar('0') == -1
+		|| ft_putchar('x') == -1)
+			return (-1);
+	while (cmp--)
+	{
+		if (ft_putchar(stock[cmp]) == -1)
+			return (-1);
+	}
+	return (14);
 }

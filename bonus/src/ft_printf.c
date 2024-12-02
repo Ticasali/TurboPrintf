@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ticasali <ticasali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/01 20:10:48 by ticasali          #+#    #+#             */
-/*   Updated: 2024/12/02 17:23:58 by ticasali         ###   ########.fr       */
+/*   Created: 2024/11/14 11:36:44 by ticasali          #+#    #+#             */
+/*   Updated: 2024/12/01 22:50:21 by ticasali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,17 +26,19 @@ int	ft_printf(char const *str, ...)
 	{
 		temp = 0;
 		if (str[ct] == '%')
-			temp = ft_select_params(va, (char *)(&str[++ct]));
+			temp = ft_select_params(va, (char *)(&str[ct + 1]));
 		if (temp == -1)
 			return (-1);
+		while (temp != 0 && ft_check_flag(str[ct]) == false)
+			++ct;
 		ret += temp;
-		if (str[ct - 1] != '%' && str[ct] != '\0')
-		{
-			ret++;
+		if (ft_check_flag(str[ct]) == true)
+			++ct;
+		if (str[ct] != '%' && str[ct] != '\0')
 			if (ft_putchar(str[ct]) == -1)
 				return (-1);
-		}
-		++ct;
+		if (str[ct] != '\0')
+			++ct;
 	}
 	va_end(va);
 	return (ret);

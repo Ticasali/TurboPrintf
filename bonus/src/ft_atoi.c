@@ -1,32 +1,56 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putadrr.c                                       :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ticasali <ticasali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/17 04:31:32 by ticasali          #+#    #+#             */
-/*   Updated: 2024/11/17 21:11:49 by ticasali         ###   ########.fr       */
+/*   Created: 2024/11/16 18:18:50 by ticasali          #+#    #+#             */
+/*   Updated: 2024/12/02 15:39:14 by ticasali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-int	ft_print_addr(void	*adrr, char *base)
+int	ft_atoi(char const *str)
 {
-	char	stock[16];
-	int		cmp;
-	unsigned long adr;
-	cmp = -1;
-	adr = (unsigned long)(unsigned char *)(adrr);
-	while (++cmp < 16)
+	int	ret;
+	size_t	ct;
+
+	ct = 0;
+	ret = 0;
+	while (str[ct] >= '0' && str[ct] <= '9')
 	{
-		stock[cmp] = base[adr % 16];
-		adr = adr / 16;
+		ret += (str[ct] - 48);
+		++ct;
+		if (str[ct] >= '0' && str[ct] <= '9')
+			ret *= 10;
 	}
-	while (cmp--)
+	return (ret);
+}
+
+size_t	ft_count_atoi(int n)
+{
+	int	ret;
+
+	ret = 0;
+	while (n >= 10)
 	{
-		write(1, &stock[cmp], 1);
+		++ret;
+		n /= 10;
 	}
-	return (16);
+	return (ret + 1);
+}
+
+int	ft_count_atoui(unsigned int n)
+{
+	int	ret;
+
+	ret = 0;
+	while (n >= 10)
+	{
+		++ret;
+		n /= 10;
+	}
+	return (ret + 1);
 }

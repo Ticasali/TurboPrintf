@@ -1,43 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_putadrr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ticasali <ticasali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/01 20:10:48 by ticasali          #+#    #+#             */
-/*   Updated: 2024/12/02 17:23:58 by ticasali         ###   ########.fr       */
+/*   Created: 2024/11/17 04:31:32 by ticasali          #+#    #+#             */
+/*   Updated: 2024/11/30 08:10:44 by ticasali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/ft_printf.h"
 
-int	ft_printf(char const *str, ...)
+int	ft_print_adr(void	*adrr, short debug ,char effect, char *base)
 {
-	va_list	va;
-	size_t	ct;
-	int		ret;
-	int		temp;
-
-	ct = 0;
-	ret = 0;
-	va_start(va, str);
-	while (str[ct] != '\0')
+	char	stock[12];
+	int		cmp;
+	unsigned long adr;
+	cmp = -1;
+	adr = (unsigned long)(unsigned char *)(adrr);
+	while (++cmp < 12)
 	{
-		temp = 0;
-		if (str[ct] == '%')
-			temp = ft_select_params(va, (char *)(&str[++ct]));
-		if (temp == -1)
-			return (-1);
-		ret += temp;
-		if (str[ct - 1] != '%' && str[ct] != '\0')
-		{
-			ret++;
-			if (ft_putchar(str[ct]) == -1)
-				return (-1);
-		}
-		++ct;
+		stock[cmp] = base[adr % 16];
+		adr = adr / 16;
 	}
-	va_end(va);
-	return (ret);
+	if (ft_print_char('0', debug, effect) == -1
+		|| ft_print_char('x', debug, effect) == -1)
+			return (-1);
+	while (cmp--)
+	{
+		if (ft_print_char(stock[cmp], debug, effect) == -1)
+			return (-1);
+	}
+	return (14);
 }
