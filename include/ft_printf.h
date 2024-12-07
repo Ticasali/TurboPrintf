@@ -6,7 +6,7 @@
 /*   By: ticasali <ticasali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 15:21:43 by ticasali          #+#    #+#             */
-/*   Updated: 2024/12/02 22:30:30 by ticasali         ###   ########.fr       */
+/*   Updated: 2024/12/03 11:01:05 by ticasali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 #include <stdbool.h>
 #include <stddef.h>
 #include <stdarg.h>
+
+#define	base16 "0123456789abcdef"
+#define BASE16 "0123456789ABCDEF"
 
 int	ft_printf(char const *str, ...);
 int	ft_strlen(char *str);
