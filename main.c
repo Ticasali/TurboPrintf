@@ -5,23 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ticasali <ticasali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/02 17:14:26 by ticasali          #+#    #+#             */
-/*   Updated: 2024/12/03 11:02:03 by ticasali         ###   ########.fr       */
+/*   Created: 2024/12/08 13:09:07 by ticasali          #+#    #+#             */
+/*   Updated: 2024/12/16 04:46:35 by ticasali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/ft_printf.h"
+#include "bonus/include/ft_printf_bonus.h"
 #include "stdio.h"
+#include "limits.h"
 
-int		main(void)
+int	main(void)
 {
-	int val;
-	char a = 'a';
-	char str[] = "Bonjour";
-	char str2[] = "vous";
-	int d = -671;
-	val = ft_printf("%d %d %d %d\n", d, d, d, d);
-	printf("%d\n", val);
-	val = printf("%d %d %d %d\n", d, d, d, d);
-	printf("%d\n", val);
+	int ret;
+	int	ret2;
+	char str[] = "Test";
+	char *str2 = NULL;
+	int t = 2648;
+	ret = ft_printf("   %YDs    \n", str);
+	ret2 = printf("   %s    \n", str);
+	printf("%d\n", ret);
+	printf("%d\n", ret2);
 }

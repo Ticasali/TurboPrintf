@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atoi_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ticasali <ticasali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/16 18:18:50 by ticasali          #+#    #+#             */
-/*   Updated: 2024/12/02 15:39:14 by ticasali         ###   ########.fr       */
+/*   Updated: 2024/12/16 02:09:51 by ticasali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_printf.h"
+#include "../include/ft_printf_bonus.h"
 
 int	ft_atoi(char const *str)
 {
@@ -29,11 +29,16 @@ int	ft_atoi(char const *str)
 	return (ret);
 }
 
-size_t	ft_count_atoi(int n)
+int	ft_count_atoi(int n)
 {
 	int	ret;
 
 	ret = 0;
+	if (n < 0)
+	{
+		++ret;
+		n *= -1;
+	}
 	while (n >= 10)
 	{
 		++ret;

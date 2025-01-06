@@ -6,22 +6,21 @@
 /*   By: ticasali <ticasali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 15:21:43 by ticasali          #+#    #+#             */
-/*   Updated: 2024/12/03 11:01:05 by ticasali         ###   ########.fr       */
+/*   Updated: 2024/12/14 10:28:23 by ticasali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef FT_PRINTF_H
-#define FT_PRINTF_H
+# define FT_PRINTF_H
 
-#include <stdbool.h>
-#include <stddef.h>
-#include <stdarg.h>
+# include <stdbool.h>
+# include <stddef.h>
+# include <stdarg.h>
 
-#define	base16 "0123456789abcdef"
-#define BASE16 "0123456789ABCDEF"
+# define MIN_BASE_16 "0123456789abcdef"
+# define MAJ_BASE_16 "0123456789ABCDEF"
 
-int	ft_printf(char const *str, ...);
+int	ft_printf(char const *str, ...) __attribute__ ((format (printf, 1, 2)));
 int	ft_strlen(char *str);
 int	ft_select_params(va_list va, char *str);
 int	ft_uint_lenght(unsigned int n);
@@ -33,6 +32,5 @@ int	ft_putnbr_unsigned(unsigned int nb);
 int	ft_putstr(char *str);
 int	ft_putnbr(int nb);
 int	ft_base_lenght(int n, char *base);
-bool	ft_check_flag(char c);
 
 #endif

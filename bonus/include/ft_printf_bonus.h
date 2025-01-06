@@ -1,31 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_printf_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ticasali <ticasali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 11:35:26 by ticasali          #+#    #+#             */
-/*   Updated: 2024/12/01 17:43:06 by ticasali         ###   ########.fr       */
+/*   Updated: 2024/12/16 02:05:19 by ticasali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-#define	FT_PRINTF_H
+#ifndef FT_PRINTF_BONUS_H
+# define FT_PRINTF_BONUS_H
 
-#include <unistd.h>
-#include <stdarg.h>
-#include <stdio.h>
-#include <stdbool.h>
+# include <unistd.h>
+# include <stdarg.h>
+# include <stdio.h>
+# include <stdbool.h>
 
-#define RESET		"\x1b[0m"
-#define TWINKLE		"\x1b[7m"
-#define RED			"\x1b[31m"
-#define GREEN		"\x1b[32m"
-#define YELLOW		"\x1b[33m"
-#define BLUE		"\x1b[34m"
-#define MAGENTA		"\x1b[35m"
-#define CYAN		"\x1b[36m"
+# define RESET			"\x1b[0m"
+# define TWINKLE		"\x1b[7m"
+# define RED			"\x1b[31m"
+# define GREEN			"\x1b[32m"
+# define YELLOW			"\x1b[33m"
+# define BLUE			"\x1b[34m"
+# define MAGENTA		"\x1b[35m"
+# define CYAN			"\x1b[36m"
+# define MIN_BASE_16	"0123456789abcdef"
+# define MAJ_BASE_16	"0123456789ABCDEF"
+# define BASE_8			"01234567"
+# define BASE_2			"01"
 
 typedef	struct	pars_param_s
 {
@@ -48,9 +52,9 @@ typedef	struct	pars_param_s
 pars_param_t	ft_set_false_struct(void);
 pars_param_t	ft_set_struct(pars_param_t pars, char c);
 pars_param_t	ft_load_param(char *str);
-size_t	ft_strlen(char *str);
+int	ft_strlen(char *str);
 int	ft_atoi(char const *str);
-size_t	ft_count_atoi(int n);
+int	ft_count_atoi(int n);
 int	ft_count_atoui(unsigned int n);
 size_t	count_len_precision(char *str, pars_param_t pars);
 int	ft_printf(char const *str, ...);
@@ -70,6 +74,8 @@ int	ft_putnbr_unsigned_statement(unsigned int num, pars_param_t pars);
 int	ft_putadrr_statement(void *adrr, pars_param_t pars, char *base);
 int	ft_putnbr_base_statement(int num, pars_param_t pars, char *base);
 int	ft_putnbr_prefix(int nb, pars_param_t pars);
+int	ft_putadrr_error(short debug, char effect);
+int	ft_putstr_error(pars_param_t pars);
 bool	ft_check_char(char c);
 bool	ft_check_flag(char c);
 int	ft_putchar(char c);

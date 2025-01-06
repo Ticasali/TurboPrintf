@@ -6,7 +6,7 @@
 /*   By: ticasali <ticasali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 23:11:18 by ticasali          #+#    #+#             */
-/*   Updated: 2024/12/02 15:58:38 by ticasali         ###   ########.fr       */
+/*   Updated: 2024/12/14 10:30:31 by ticasali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,16 @@
 
 int	ft_putstr(char *str)
 {
-	int	ct;
+	size_t	ct;
 
 	ct = 0;
+	if (str == NULL)
+		return (ft_putstr("(null)"));
 	while (str[ct])
 	{
 		if (ft_putchar(str[ct]) == -1)
 			return (-1);
 		++ct;
 	}
-	return (ct);
+	return ((int)(ct));
 }

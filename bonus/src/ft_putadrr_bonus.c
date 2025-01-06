@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putadrr.c                                       :+:      :+:    :+:   */
+/*   ft_putadrr_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ticasali <ticasali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 04:31:32 by ticasali          #+#    #+#             */
-/*   Updated: 2024/11/30 08:10:44 by ticasali         ###   ########.fr       */
+/*   Updated: 2024/12/16 01:55:42 by ticasali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_printf.h"
+#include "../include/ft_printf_bonus.h"
 
 int	ft_print_adr(void	*adrr, short debug ,char effect, char *base)
 {
@@ -18,6 +18,8 @@ int	ft_print_adr(void	*adrr, short debug ,char effect, char *base)
 	int		cmp;
 	unsigned long adr;
 	cmp = -1;
+	if (adrr == NULL)
+		return (ft_putadrr_error(debug, effect));
 	adr = (unsigned long)(unsigned char *)(adrr);
 	while (++cmp < 12)
 	{
@@ -33,4 +35,15 @@ int	ft_print_adr(void	*adrr, short debug ,char effect, char *base)
 			return (-1);
 	}
 	return (14);
+}
+
+int	ft_putadrr_error(short debug, char effect)
+{
+	if (ft_print_char('(', debug, effect) == -1
+		|| ft_print_char('n', debug, effect) == -1
+		|| ft_print_char('i', debug, effect) == -1
+		|| ft_print_char('l', debug, effect) == -1
+		|| ft_print_char(')', debug, effect) == -1)
+		return (-1);
+	return (5);
 }

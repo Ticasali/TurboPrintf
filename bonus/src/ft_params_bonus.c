@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_params.c                                        :+:      :+:    :+:   */
+/*   ft_params_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ticasali <ticasali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/14 16:57:24 by ticasali          #+#    #+#             */
-/*   Updated: 2024/12/01 22:51:07 by ticasali         ###   ########.fr       */
+/*   Updated: 2024/12/16 04:46:08 by ticasali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_printf.h"
+#include "../include/ft_printf_bonus.h"
 
 bool	ft_check_flag(char c)
 {
@@ -67,7 +67,7 @@ pars_param_t	ft_set_struct(pars_param_t pars, char c)
 	if (pars.number != 0 && (ft_check_attribut(c) == true))
 		pars.error = true;
 	else if ((c == 'C' || c == 'B' || c == 'M' || c == 'G' || c == 'T' || c == 'Y' || c == 'R')
-		&& pars.number == '\0')
+		&& pars.effect == '\0')
 		pars.effect = c;
 	else if ((c == 'c' || c == 's' || c == 'd' || c == 'p' 
 		|| c == 'i' || c == 'u' || c == 'x' || c == 'X' 
@@ -86,7 +86,10 @@ pars_param_t	ft_set_struct(pars_param_t pars, char c)
 	else if (c == '0')
 		pars.zero = true;
 	else
-		pars.check = true;
+	{
+		pars.error = true;
+		write(1, "A", 1);
+	}
 	return (pars);
 }
 
@@ -97,7 +100,7 @@ pars_param_t	ft_load_param(char *str)
 
 	ct = 0;
 	pars = ft_set_false_struct();
-	while (ft_check_char(str[ct]) == true && pars.check == false)
+	while (ft_check_flag(str[ct]) != true && pars.error == false)
 	{
 		if (str[ct] == '.')
 		{
@@ -115,8 +118,11 @@ pars_param_t	ft_load_param(char *str)
 		}
 		else
 			pars = ft_set_struct(pars, str[ct]);
+		if (ft_check_char(str[ct]) == false)
+			break;
 		ct++;
 	}
+	pars = ft_set_struct(pars, str[ct]);
 	return (pars);
 }
 

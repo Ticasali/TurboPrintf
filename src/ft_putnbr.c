@@ -6,7 +6,7 @@
 /*   By: ticasali <ticasali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 15:35:30 by ticasali          #+#    #+#             */
-/*   Updated: 2024/12/02 22:51:00 by ticasali         ###   ########.fr       */
+/*   Updated: 2024/12/14 10:31:36 by ticasali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_putnbr(int nb)
 {
 	if (nb == INT_MIN)
 	{
-		if ((ft_putchar('-') == -1) 
+		if ((ft_putchar('-') == -1)
 			|| (ft_putchar('2' == -1)))
 			return (-1);
 		ft_putnbr(147483648);
@@ -66,9 +66,12 @@ int	ft_putnbr_base(int nbr, char *base)
 
 int	ft_print_adr(void	*adrr, char *base)
 {
-	char	stock[12];
-	int		cmp;
-	unsigned long adr;
+	char			stock[12];
+	int				cmp;
+	unsigned long	adr;
+
+	if (adrr == NULL)
+		return (ft_putstr("(nil)"));
 	cmp = -1;
 	adr = (unsigned long)(adrr);
 	while (++cmp < 12)
@@ -78,7 +81,7 @@ int	ft_print_adr(void	*adrr, char *base)
 	}
 	if (ft_putchar('0') == -1
 		|| ft_putchar('x') == -1)
-			return (-1);
+		return (-1);
 	while (cmp--)
 	{
 		if (ft_putchar(stock[cmp]) == -1)

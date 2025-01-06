@@ -6,7 +6,7 @@
 /*   By: ticasali <ticasali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 15:37:45 by ticasali          #+#    #+#             */
-/*   Updated: 2024/12/02 22:38:12 by ticasali         ###   ########.fr       */
+/*   Updated: 2024/12/14 10:31:52 by ticasali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ int	ft_int_lenght(int n)
 
 int	ft_base_lenght(int n, char *base)
 {
-	int	ret;
-	unsigned int cast;
+	int				ret;
+	unsigned int	cast;
 
 	ret = 0;
 	cast = (unsigned int)(n);

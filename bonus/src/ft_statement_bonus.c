@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_statement.c                                     :+:      :+:    :+:   */
+/*   ft_statement_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ticasali <ticasali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 12:07:27 by ticasali          #+#    #+#             */
-/*   Updated: 2024/12/01 17:51:04 by ticasali         ###   ########.fr       */
+/*   Updated: 2024/12/16 03:11:55 by ticasali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ft_printf.h"
+#include "../include/ft_printf_bonus.h"
 
 int	ft_print_color(char c, short debug)
 {
@@ -91,7 +91,7 @@ int	ft_putstr_statement(char *str, pars_param_t pars)
 
 int	ft_putnbr_statement(int num, pars_param_t pars)
 {
-	size_t	ct;
+	int	ct;
 
 	ct = 0;
 	if (pars.htag == true)
@@ -101,18 +101,18 @@ int	ft_putnbr_statement(int num, pars_param_t pars)
 		if (pars.less == true)
 			if (ft_putnbr_prefix(num, pars) == -1)
 				return (-1);
-		while (++ct < (pars.number - ft_count_atoui(num)))
+		while (++ct < ((int)pars.number - ft_count_atoui(num)) + 1)
 			if (ft_print_char(pars.carac[pars.zero], pars.debug, pars.effect) == -1)
 				return (-1);
 		if (pars.less == false)
 			if (ft_putnbr_prefix(num, pars) == -1)
 				return (-1);
-		return (ct + ft_count_atoui(num));
+		return ((ct - 1) + ft_count_atoui(num) + pars.more);
 	}
 	else
 		if (ft_putnbr_prefix(num, pars) == -1)
 			return (-1);
-	return (1);
+	return (ft_count_atoui(num) + pars.more);
 }
 
 int	ft_putnbr_unsigned_statement(unsigned int num, pars_param_t pars)
@@ -146,7 +146,7 @@ int	ft_putadrr_statement(void *adrr, pars_param_t pars, char *base)
 	size_t	ct;
 
 	ct = 0;
-	if (pars.htag == true || pars.blank == true || pars.more == true || pars.zero == true)
+	if (pars.htag == true || pars.blank == true || pars.more == true || pars.zero == true  || pars.point != 0)
 		return (-1);
 	if (pars.number != 0)
 	{
